@@ -1,0 +1,383 @@
+---
+title: "Lindeberg-Feller CLT and Lyapunov's Condition"
+author: "| Arnab Rakshit\n| Rupanjan Mukherjee \n| Sourav Biswas\n"
+output:
+  html_document:
+    toc: yes
+    toc_depth: '3'
+    df_print: paged
+  word_document:
+    toc: yes
+    toc_depth: '3'
+  pdf_document:
+    toc: yes
+    toc_depth: 3
+    highlight: default
+    number_sections: yes
+header-includes:
+- \usepackage{titling}
+- \pretitle{\begin{center} \includegraphics[width=2in,height=2in]{logo.png}\LARGE\\}
+- \posttitle{\end{center}}
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyhead[LE,RO]{Arnab, Sourav, Rupanjan}
+editor_options:
+  markdown:
+    wrap: sentence
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+```
+
+\newpage
+
+# Lindeberg-Feller Central Limit Theorem.
+
+## About the Theorem.
+
+Sufficiency is proved by Lindeberg in `1922` and necessity by Feller in `1935`.
+*Lindeberg-Feller CLT* is one of the most far-reaching results in probability theory.
+Nearly all generalizations of various types of central limit theorems spin from Lindeberg-Feller CLT.
+
+The insights of the Lindeberg condition are that the "wild" values of the random variables, compared with $s_n$ , the standard deviation of $S_n$ as the normalizing constant, are insignificant and can be truncated off without affecting the general behavior of the partial sum $S_n$.
+
+## Lindeberg - Feller CLT.
+
+*Suppose* $X_1,X_2,\ldots,X_n$ *are independent r.v.s with mean* $0$ *and variance* $\sigma_n^2$*. Let* $s^2_n=\sum_{i=1}^n\sigma^2_j$ *denote the variance of partial sum* $S_n=X_1+X_2+\ldots+X_n$ *. If, for every* $\epsilon>0$ *,*
+
+$$
+\frac{1}{s_n^2}\sum_{j=1}^n\mathbb{E}\left(X_j^2\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right)\rightarrow0,
+$$
+
+*then* $\frac{S_n}{s_n}\overset{\mathcal{D}}{\longrightarrow}\mathcal{N}\left(0,1\right)$*.*
+
+*Conversely, if* $\underset{1\leq j\leq n}{\max}\frac{\sigma_j^2}{s_n^2}\rightarrow0$ *and* $\frac{S_n}{s_n}\overset{\mathcal{D}}{\longrightarrow}\mathcal{N}\left(0,1\right)$ *, then Lindeberg Condition holds.*
+
+## Prerequisites
+
+1.  $$
+    \forall x>0,\left|e^{-x}-1+x\right|\leq x^2/2
+    $$
+
+2.  For complex $z_j$ and $w_j$ with $\left|z_j\right|\leq1$ and $\left|w_j\right|\leq1$, $\left|\prod_{j=1}^nz_j-\prod_{j=1}^nw_j\right|\leq\sum_{j=1}^n\left|z_j-w_j\right|$
+
+3.  $$
+    \forall x\in\mathbb{R}\,\,\cos x-1\geq-\frac{x^2}{2}
+    $$
+
+4.  $$
+    \left|\log (x+1)-x\right|\leq x^2\,\,\,\,\mathrm{for}\,\,x>0
+    $$
+
+5.  $\forall\,k\geq1$
+
+$$
+\left|\varphi_X\left(\lambda\right)-1-\sum_{j=1}^k\frac{\left(i\lambda\right)^j}{j!}\mathbb{E}\left(X^j\right)\right|\leq\min\left\{\frac{2\left|\lambda\right|^k\mathbb{E}\left|X\right|^k}{k!},\frac{\left|\lambda\right|^{k+1}\mathbb{E}\left|X\right|^{k+1}}{(k+1)!}\right\}\,\,\,\,\forall\lambda\in\mathbb{R}
+$$
+
+# If part
+
+## Proof of Lindeberg-Feller CLT contd.
+
+"$\Leftarrow$" The Lindeberg Condition implies,
+
+$$
+\sigma_j^2=\mathbb{E}\left(X_j^2\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right)+\mathbb{E}\left(X_j^2\boldsymbol{1}_\left\{\left|X_j\right|\leq\epsilon s_n\right\}\right)
+$$
+
+$$
+\leq \mathbb{E}\left(X_j^2\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right) + \epsilon^2s_n^2\,\,\, \forall j
+$$
+
+$$
+\leq \sum_{i=1}^n \mathbb{E}\left(X_j^2\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right) + \epsilon^2s_n^2\,\, \forall \,\,j
+$$
+
+$$
+\implies \frac{\sigma_j^2}{s_n^2}\leq \frac{1}{s_n^2}{\sum_{i=1}^n \mathbb{E}\left(X_j^2\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right)} + \epsilon^2\,\,\,\forall j
+$$
+
+$$
+\therefore \underset{1\leq j\leq n}{\max}\left(\frac{\sigma_j^2}{s_n^2} \right) \leq \underset{\longrightarrow 0}{\underbrace{ \frac{1}{s_n^2}{\sum_{i=1}^n \mathbb{E}\left(X_j^2\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right)}}} + \epsilon^2
+$$
+
+by letting $n\rightarrow\infty$ and then $\epsilon\downarrow0$,
+
+$$
+\underset{1\leq j\leq n}{\max}\left(\frac{\sigma_j^2}{s_n^2} \right)\longrightarrow0
+$$
+
+For any $\epsilon >0$, then $\forall\, j$
+
+$$
+\left|\mathbb{E}\left(e^{itX_j/s_n}\right)-e^{-t^2\sigma_j^2/2s_n^2}\right|
+$$
+
+$$
+=\left|\mathbb{E}\left(e^{itX_j/s_n}\right)-\mathbb{E}\left(1+it\frac{X_j}{s_n}-\frac{t^2}{2}\frac{X_j^2}{s_n^2}\right)+1+it\mathbb{E}\left(\frac{X_j}{s_n}\right)-\frac{t^2}{2}\mathbb{E}\left(\frac{X_j^2}{s_n^2}\right)-e^{-t^2\sigma_j^2/2s_n^2}+1-\frac{t^2\sigma^2_j}{2s_n^2}-1+\frac{t^2\sigma^2_j}{2s_n^2}\right|
+$$
+
+$$
+\leq \left|\mathbb{E}\left(e^{itX_j/s_n}\right)-\mathbb{E}\left(1+it\frac{X_j}{s_n}-\frac{t^2}{2}\frac{X_j^2}{s_n^2}\right)\right|+\left|e^{-t^2\sigma_j^2/2s_n^2}-1+\frac{t^2\sigma^2_j}{2s_n^2}\right|
+$$
+
+$$
+\leq \mathbb{E}\left[\min\left(\frac{t^2X_j^2}{s_n^2},\frac{\left|tX_j\right|^3}{6s_n^3}\right)\right]+\frac{t^4\sigma_j^4}{8s_n^4}
+$$
+
+$$
+\leq \mathbb{E}\left[\min\left(\frac{t^2X_j^2}{s_n^2},\frac{\left|tX_j\right|^3}{6s_n^3}\right)\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right]+\mathbb{E}\left[\min\left(\frac{t^2X_j^2}{s_n^2},\frac{\left|tX_j\right|^3}{6s_n^3}\right)\boldsymbol{1}_\left\{\left|X_j\right|\leq\epsilon s_n\right\}\right]+\frac{t^4\sigma_j^4}{8s_n^4}
+$$
+
+$$
+\leq \mathbb{E}\left[\frac{t^2X_j^2}{s_n^2}\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right]+\mathbb{E}\left[\frac{\left|tX_j\right|^3}{6s_n^3}\boldsymbol{1}_\left\{\left|X_j\right|\leq\epsilon s_n\right\}\right] + \frac{t^4\sigma_j^4}{8s_n^4}
+$$
+
+$$
+\leq \frac{t^2}{s_n^2}\mathbb{E}\left[{X_j^2}\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right]+\frac{\left|t\right|^3\epsilon}{6s_n^2}\mathbb{E}\left[X_j^2\right] + \frac{t^4\sigma_j^2}{s_n^2}\underset{1\leq k\leq n}{\max}\left(\frac{\sigma_k^2}{s_n^2} \right)
+$$
+
+## Proof of Lindeberg-Feller CLT contd.
+
+Then for any fixed $t$,
+
+$$
+\left|\mathbb{E}\left(e^{itS_n/s_n}\right)-e^{-t^2/2}\right|
+$$
+
+$$
+=\left|\prod_{j=1}^n\mathbb{E}\left(e^{itX_j/s_n}\right)-\prod_{j=1}^n\left(e^{-t^2\sigma_j^2/2s_n^2}\right)\right|
+$$
+
+$$
+\leq\sum_{j=1}^n\left|\mathbb{E}\left(e^{itX_j/s_n}\right)-e^{-t^2\sigma_j^2/2s_n^2}\right|
+$$
+
+$$
+\leq \sum_{j=1}^n\left(\frac{t^2}{s_n^2}\mathbb{E}\left[{X_j^2}\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right]+\frac{\left|t\right|^3\epsilon}{6s_n^2}\mathbb{E}\left[X_j^2\right] + \frac{t^4\sigma_j^2}{s_n^2}\underset{1\leq k\leq n}{\max}\left(\frac{\sigma_k^2}{s_n^2} \right)\right)
+$$
+
+$$
+\leq\left(\frac{t^2}{s_n^2}\sum_{j=1}^n \mathbb{E}\left[{X_j^2}\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right]+\frac{\left|t\right|^3\epsilon}{6}+t^4\underset{1\leq k\leq n}{\max}\left(\frac{\sigma_k^2}{s_n^2} \right)\right)
+$$
+
+$$
+\rightarrow\frac{\epsilon\left|t\right|^3}{6}\,\,\,\mathrm{as}\,\,n\rightarrow\infty
+$$
+
+Since, $\epsilon>0$ is arbitrary, it follows that, $\mathbb{E}\left(e^{itS_n/s_n}\right)\rightarrow e^{-t^2/2}$ for all $t$ .
+Levy's continuity theorem implies,
+
+$$
+\frac{S_n}{s_n}\overset{\mathcal{D}}{\longrightarrow}\mathcal{N}\left(0,1\right)
+$$
+
+# Only If Part.
+
+## Proof of the only if part.
+
+$"\implies"$ Let $\psi_j$ be the Characteristic Function of $X_j$ .
+The asymptotic normality is equivalent to,
+
+$$
+\prod_{j=1}^{n}\psi_j\left(\frac{t}{s_n}\right)\rightarrow e^{-\frac{t^2}{2}}
+$$
+
+Notice that,
+
+$$
+\left|\psi_j\left(\frac{t}{s_n}\right)-1\right|\leq\frac{t^2\sigma_j^2}{2s_n^2}
+$$
+
+Write as $n\rightarrow\infty$,
+
+$$
+\sum_{j=1}^{n}\left(\psi_j\left(\frac{t}{s_n}\right)-1\right)+\frac{t^2}{2}
+$$
+
+$$
+=\sum_{j=1}^{n}\left(\psi_j\left(\frac{t}{s_n}\right)-1-\log\psi_j\left(\frac{t}{s_n}\right)\right)+\underset{=o\left(1\right)}{\underbrace{\sum_{i=1}^n\log\psi_j\left(\frac{t}{s_n}\right)+\frac{t^2}{2}}}
+$$
+
+$$
+\leq \sum_{j=1}^{n}\left|\psi_j\left(\frac{t}{s_n}\right)-1\right|^2+o\left(1\right)
+$$
+
+$$
+\leq \underset{1\leq j\leq n}{\max}\left|\psi_j\left(\frac{t}{s_n}\right)-1 \right|\times \sum_{j=1}^{n}\left|\psi_j\left(\frac{t}{s_n}\right)-1\right|+o\left(1\right)
+$$
+
+$$
+\leq \underset{1\leq j\leq n}{\max}\frac{t^2\sigma_j^2}{2s_n^2}\times\sum_{j=1}^{n}\frac{t^2\sigma_j^2}{2s_n^2}+o\left(1\right)=o\left(1\right)
+$$
+
+by the assumption, $\underset{1\leq k\leq n}{\max}\left(\frac{\sigma_k^2}{s_n^2} \right)\rightarrow0$
+
+## Proof of the only if part contd.
+
+On the other hand, by definition of characteristic function, the above expression is, as $n\rightarrow\infty$,
+
+$$
+o(1)= \sum_{j=1}^{n}\left(\psi_j\left(\frac{t}{s_n}\right)-1\right)+\frac{t^2}{2}  
+$$
+
+$$
+=\sum_{j=1}^{n}\mathbb{E}\left(e^{itX_j/s_n}-1\right)+\frac{t^2}{2}
+$$
+
+$$
+=\sum_{j=1}^{n}\mathbb{E}\left(\cos\left(\frac{tX_j}{s_n}\right)-1\right)+\frac{t^2}{2}+i\sum_{j=1}^{n}\mathbb{E}\left(\sin\left(\frac{tX_j}{s_n}\right)\right)
+$$
+
+$$
+=\sum_{j=1}^{n}\mathbb{E}\left\{\left(\cos\left(\frac{tX_j}{s_n}\right)-1\right)\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right\}+\sum_{j=1}^{n}\mathbb{E}\left\{\left(\cos\left(\frac{tX_j}{s_n}\right)-1\right)\boldsymbol{1}_\left\{\left|X_j\right|\leq\epsilon s_n\right\}\right\}+\frac{t^2}{2}+\mathrm{imaginary\,part\,(immaterial)}
+$$
+
+Since, $\cos x -1\geq-\frac{x^2}{2}$ for all real $x$,
+
+$$
+\frac{1}{s_n^2}{\sum_{i=1}^n \mathbb{E}\left(X_j^2\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right)}=1-\frac{2}{t^2}\sum_{j=1}^{n}\mathbb{E}\left(\frac{t^2X_j^2}{2s_n^2}\boldsymbol{1}_\left\{\left|X_j\right|\leq\epsilon s_n\right\}\right)
+$$
+
+$$
+\leq\frac{2}{t^2}\left(\frac{t^2}{2}+\sum_{j=1}^n\mathbb{E}\left\{\left(\cos\left(\frac{tX_j}{s_n}\right)-1\right)\boldsymbol{1}_\left\{\left|X_j\right|\leq\epsilon s_n\right\}\right\}\right)
+$$
+
+$$
+\leq\frac{2}{t^2}\left(\left|\sum_{j=1}^n\mathbb{E}\left\{\left(\cos\left(\frac{tX_j}{s_n}\right)-1\right)\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right\}\right|+o(1)\right)
+$$
+
+$$
+\leq\frac{2}{t^2}\sum_{j=1}^n2\mathbb{P}\left(\left|X_j\right|>\epsilon s_n\right)+o(1)
+$$
+
+$$
+\leq\frac{4}{t^2}\sum_{j=1}^{n}\left(\frac{\sigma_j^2}{\epsilon^2s_n^2}\right)+o(1)\,\,\,\,\mathrm{by\,Chebyshev's\,Inequality}
+$$
+
+$$
+\leq\frac{4}{t^2\epsilon^2}+o(1).
+$$
+
+Since $t$ can be chosen arbitrarily large, Lindeberg condition holds.
+
+# Lyapunov's Condition.
+
+## Lyapunov's Condition.
+
+*Suppose* $X_1,X_2,\ldots,X_n$ *are independent r.v.s with mean* $0$ *and variance* $\sigma_n^2$*. Let* $s^2_n=\sum_{i=1}^n\sigma^2_j$ *denote the variance of partial sum* $S_n=X_1+X_2+\ldots+X_n$ *and* $\mathbb{E}\left(\left|X_j\right|^{2+\delta}\right)<\infty\,\,\forall j$*. Then,*
+
+$$
+\frac{1}{s_n^{2+\delta}}\sum_{j=1}^n\mathbb{E}\left(\left|X_j\right|^{2+\delta}\right)\longrightarrow0\,\,\,\mathrm{as}\,n\rightarrow\infty
+$$
+
+*for some* $\delta>0$*.*
+
+## Lyapunov's Condition $\boldsymbol{\implies}$ Lindeberg's Condition.
+
+Note that,
+
+$$
+\frac{1}{s_n^2}\sum_{j=1}^n\mathbb{E}\left(X_j^2\boldsymbol{1}_\left\{\left|X_j\right|>\epsilon s_n\right\}\right)=\frac{1}{s_n^2}\sum_{j=1}^n\mathbb{E}\left(X_j^2\boldsymbol{1}_\left\{\left|\frac{X_j}{\epsilon s_n}\right|>1\right\}\right)$$
+
+$$
+=\frac{1}{s_n^2}\sum_{j=1}^n\mathbb{E}\left(X_j^2\boldsymbol{1}_\left\{\frac{\left|X_j\right|^{\delta}}{\epsilon^{\delta} s_n^{\delta}}>1\right\}\right)$$
+
+$$
+\leq\frac{1}{s_n^2}\sum_{j=1}^{n}\mathbb{E}\left(X_j^2\frac{\left|X_j\right|^{\delta}}{\epsilon^{\delta} s_n^{\delta}}\right)\leq\frac{1}{\epsilon^{\delta} s_n^{\delta}}\sum_{j=1}^{n}\mathbb{E}\left(\left|X_j\right|^{2+\delta}\right)\longrightarrow0
+$$
+
+if Lyapunov's Condition holds.
+
+# Multivariate Version.
+
+## Multivariate Lindeberg-Feller CLT.
+
+*Let* $\boldsymbol{X_1},\boldsymbol {X_2},\ldots,\boldsymbol{X_n}$ *be independent random vectors with* $\mathbb{E}\left(\boldsymbol{X_j}\right)=\boldsymbol{0}$ *and* $\mathrm{Var}\left(\boldsymbol{X_j}\right)=\boldsymbol{\Sigma_j}$*. Suppose that,* $\frac{1}{n}\left(\boldsymbol{\Sigma_1}+\boldsymbol{\Sigma_2}+\ldots+\boldsymbol{\Sigma_n}\right)\rightarrow\boldsymbol{\Sigma}$ *as* $n\rightarrow\infty$ *and,*
+
+$$
+\forall\epsilon>0\,\,\frac{1}{n}\sum_{j=1}^{n}\mathbb{E}\left(\left\|\boldsymbol{X_j}\right\|^2\boldsymbol{1}_{\left\{\left\|\boldsymbol{X_j}\right\|>\epsilon\sqrt{n}\right\}}\right)\longrightarrow0\,\,\,\mathrm{as}\,n\rightarrow\infty
+$$
+
+*Then,*
+
+$$
+\frac{\boldsymbol{S_n}}{\sqrt{n}}\overset{\mathcal{D}}{\longrightarrow}\mathcal{N}_d\left(\boldsymbol{0},\boldsymbol{\Sigma}\right)\,\,\,\mathrm{as}\,n\rightarrow\infty
+$$
+
+*where* $\boldsymbol{S_n}=\boldsymbol{X_1}+\boldsymbol {X_2}+\ldots+\boldsymbol{X_n}$*.*
+
+## Proof of Multivariate Lindeberg-Feller CLT.
+
+We have $\boldsymbol{S_n}=\sum_{j=1}^{n}\boldsymbol{X_j}$ , where $\boldsymbol{X_j}\sim\left(\boldsymbol{0},\boldsymbol{\Sigma_j}\right)$ independently.
+We shall use *Cramer-Wold Device* to establish the theorem.
+We have to show, $\forall\boldsymbol{a}\in\mathbb{R}^d\setminus\left\{\boldsymbol{0}\right\}$ , $\left(0,\boldsymbol{a}'\boldsymbol{\Sigma}\boldsymbol{a}\right)$.
+
+$$
+\frac{\boldsymbol{a}'\boldsymbol{S_n}}{\sqrt{n}}\overset{\mathcal{D}}{\longrightarrow}\mathcal{N}\left({0},\boldsymbol{a}'\boldsymbol{\Sigma}\boldsymbol{a}\right)
+$$
+
+Define, $Y_j=\boldsymbol{a}'\boldsymbol{X_j}\,\,\forall j=1(1)n$ .
+Then, $Y_j\sim\left(0,\sigma_j^2\right)$ where $\sigma_j^2=\boldsymbol{a}'\boldsymbol{\Sigma_j}\boldsymbol{a},\,\,\forall j=1(1)n$ .
+Say,
+
+$$
+\tilde{S}_n=\sum_{j=1}^nY_j,\,\,\,\,\,\,\,s_n^2=\sum_{j=1}^n\sigma_j^2=\boldsymbol{a}'\left(\sum_{j=1}^n\boldsymbol{\Sigma_j}\right)\boldsymbol{a}
+$$
+
+For any $\epsilon>0$
+
+$$
+\frac{1}{s_n^2}{\sum_{j=1}^n \mathbb{E}\left(Y_j^2\boldsymbol{1}_\left\{\left|Y_j\right|>\epsilon s_n\right\}\right)}
+$$
+
+$$ \frac{1}{s_n^2}{\sum_{j=1}^n \mathbb{E}\left(\left(\boldsymbol{a}'\boldsymbol{X_j}\boldsymbol{X_j}'\boldsymbol{a}\right)\boldsymbol{1}_\left\{\left(\boldsymbol{a}'\boldsymbol{X_j}\boldsymbol{X_j}'\boldsymbol{a}\right)>\epsilon^2 s_n^2\right\}\right)} $$
+
+$$
+\leq\frac{\left\|\boldsymbol{a}\right\|^2}{s_n^2}{\sum_{j=1}^n \mathbb{E}}\left(\left\|\boldsymbol{X_j}\right\|^2\boldsymbol{1}_{\left\{\left\|\boldsymbol{X_j}\right\|^2\geq\epsilon'^2s_n^2\right\}}\right)\,\,\,\,\mathrm{where}\,\,\,\epsilon'^2=\frac{\epsilon^2}{\left\|\boldsymbol{a}\right\|^2}
+$$
+
+$$
+=\frac{1}{n}{\sum_{j=1}^n \mathbb{E}}\left(\left\|\boldsymbol{X_j}\right\|^2\boldsymbol{1}_{\left\{\left\|\boldsymbol{X_j}\right\|^2\geq\epsilon'^2s_n^2\right\}}\right)\frac{\left\|\boldsymbol{a}\right\|^2}{s_n^2/n}
+$$
+
+Now,
+
+$$
+\frac{{s_n}}{\sqrt{n}}\longrightarrow\sqrt{\boldsymbol{a}'\Sigma\boldsymbol{a}}=c\,\,(\mathrm{say})
+$$
+
+Then, $\exists K\in\mathbb{N}\ni\forall n\geq K,\,\,\frac{s_n}{\sqrt{n}}>\frac{c}{2}$ $$
+\implies\,\,\forall n\geq K, \,\,\,\,\frac{1}{n}{\sum_{j=1}^n \mathbb{E}}\left(\left\|\boldsymbol{X_j}\right\|^2\boldsymbol{1}_{\left\{\left\|\boldsymbol{X_j}\right\|^2\geq\epsilon'^2s_n^2\right\}}\right)\leq \frac{1}{n}{\sum_{j=1}^n \mathbb{E}}\left(\left\|\boldsymbol{X_j}\right\|^2\boldsymbol{1}_{\left\{\left\|\boldsymbol{X_j}\right\|^2\geq\epsilon''^2n\right\}}\right)\,\,\,\mathrm{where}\,\,\epsilon''=\epsilon'c/2
+$$
+
+Taking $\limsup$ as $n\rightarrow\infty$ on both side,we get,
+
+$$
+\frac{1}{n}{\sum_{j=1}^n \mathbb{E}}\left(\left\|\boldsymbol{X_j}\right\|^2\boldsymbol{1}_{\left\{\left\|\boldsymbol{X_j}\right\|^2\geq\epsilon'^2s_n^2\right\}}\right)\longrightarrow0\,\,\,\,\mathrm{as}\,n\rightarrow\infty
+$$
+
+from the given conditions.
+
+$$
+\therefore \sum_{j=1}^n \frac{Y_j}{s_n}\overset{\mathcal{D}}{\longrightarrow}\mathcal{N}\left(0,1\right)
+$$
+
+also,
+
+$$
+\frac{{s_n}}{\sqrt{n}}\longrightarrow\sqrt{\boldsymbol{a}'\Sigma\boldsymbol{a}}
+$$
+
+Combining, by *Slutsky's Theorem*, we get,
+
+$$
+\sum_{j=1}^n\frac{Y_j}{\sqrt{n}}\overset{\mathcal{D}}{\longrightarrow}\mathcal{N}\left(0,\boldsymbol{a}'\Sigma\boldsymbol{a}\right)\
+$$
+
+i.e.
+
+$$
+\frac{\boldsymbol{a}'\boldsymbol{S_n}}{\sqrt{n}}\overset{\mathcal{D}}{\longrightarrow}\mathcal{N}\left({0},\boldsymbol{a}'\boldsymbol{\Sigma}\boldsymbol{a}\right)
+$$
